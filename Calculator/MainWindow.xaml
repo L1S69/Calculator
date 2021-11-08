@@ -1,0 +1,271 @@
+﻿<Window x:Class="Calculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Calculator"
+        mc:Ignorable="d"
+        Title="Calculator"
+        Height="400"
+        Width="225"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        WindowStartupLocation="CenterScreen"
+        MouseDown="Window_MouseDown" FontFamily="Consolas" FontWeight="Normal"
+        >
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="buttonStyleS" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#d6ffe2"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#d6ffe2"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#c4ffd5"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#c4ffd5"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+    </Window.Resources>
+
+    <Border CornerRadius="10" Background="White" BorderBrush="White">
+    <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <Button Content="X" Style="{DynamicResource buttonStyleS}" Foreground="White" FontWeight="Bold" FontSize="12" Margin="175,5,5,5" Background="#4ba367" BorderBrush="#4ba367" Click="CloseApp">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+                <TextBlock x:Name="MainText" TextAlignment="Center" VerticalAlignment="Top" FontSize="20" FontWeight="Medium" Foreground="#5e7365" Margin="0,17,0,0" Grid.Row="1" FontFamily="Consolas"/>
+            </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Button Style="{DynamicResource buttonStyleS}" Content="0" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="5px" FontWeight="Bold" Foreground="#549467" Background="#edfff2" BorderBrush="#edfff2" Click="AddZero">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Style="{DynamicResource buttonStyleS}" Content="," Grid.Row="4" Grid.Column="2" Margin="5px" FontWeight="Bold" Foreground="#549467" Background="#edfff2" BorderBrush="#edfff2" Click="AddDot">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Style="{DynamicResource buttonStyleS}" Content="=" Grid.Row="4" Grid.Column="3" Margin="5px" FontWeight="black" FontSize="20" Foreground="White" Background="#66ff93" BorderBrush="#edfff2" Click="CalculateResult">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Style="{DynamicResource buttonStyleS}" Content="+" Grid.Row="3" Grid.Column="3" Margin="5px" FontWeight="Black" FontSize="20" Foreground="White" Background="#66ff93" BorderBrush="#edfff2" Click="SetActionAdd">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Style="{DynamicResource buttonStyleS}" Content="-" Grid.Row="2" Grid.Column="3" Margin="5px" FontWeight="Black" FontSize="20" Foreground="White" Background="#66ff93" BorderBrush="#edfff2" Click="SetActionSubstract">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Style="{DynamicResource buttonStyleS}" Content="*" Grid.Row="1" Grid.Column="3" Margin="5px" FontWeight="Black" FontSize="16" Foreground="White" Background="#66ff93" BorderBrush="#edfff2" Click="SetActionIncrease">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Style="{DynamicResource buttonStyleS}" Content="/" Grid.Row="0" Grid.Column="3" Margin="5px" FontWeight="Black" FontSize="14" Foreground="White" Background="#66ff93" BorderBrush="#edfff2" Click="SetActionDivide">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Style="{DynamicResource buttonStyleS}" Content="%" Grid.Row="0" Grid.Column="2" Margin="5px" FontWeight="Black" FontSize="14" Foreground="White" Background="#adffc5" BorderBrush="#edfff2" Click="SetActionPercent">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Style="{DynamicResource buttonStyleS}" Content="AC" Grid.Row="0" Grid.Column="0" Margin="5px" FontWeight="Black" FontSize="14" Foreground="White" Background="#adffc5" BorderBrush="#edfff2" Click="Clear">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Style="{DynamicResource buttonStyleS}" Content="+-" Grid.Row="0" Grid.Column="1" Margin="5px" FontWeight="Black" FontSize="20" Foreground="White" Background="#adffc5" BorderBrush="#edfff2" Click="Revert">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Style="{DynamicResource buttonStyleS}" Content="1" Grid.Row="3" Grid.Column="0" Margin="5px" FontWeight="Bold" Foreground="#549467" Background="#edfff2" BorderBrush="#edfff2" Click="AddOne">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Style="{DynamicResource buttonStyleS}" Content="2" Grid.Row="3" Grid.Column="1" Margin="5px" FontWeight="Bold" Foreground="#549467" Background="#edfff2" BorderBrush="#edfff2" Click="AddTwo">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Style="{DynamicResource buttonStyleS}" Content="3" Grid.Row="3" Grid.Column="2" Margin="5px" FontWeight="Bold" Foreground="#549467" Background="#edfff2" BorderBrush="#edfff2" Click="AddThree">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Style="{DynamicResource buttonStyleS}" Content="4" Grid.Row="2" Grid.Column="0" Margin="5px" FontWeight="Bold" Foreground="#549467" Background="#edfff2" BorderBrush="#edfff2" Click="AddFour">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Style="{DynamicResource buttonStyleS}" Content="5" Grid.Row="2" Grid.Column="1" Margin="5px" FontWeight="Bold" Foreground="#549467" Background="#edfff2" BorderBrush="#edfff2" Click="AddFive">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Style="{DynamicResource buttonStyleS}" Content="6" Grid.Row="2" Grid.Column="2" Margin="5px" FontWeight="Bold" Foreground="#549467" Background="#edfff2" BorderBrush="#edfff2" Click="AddSix">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Style="{DynamicResource buttonStyleS}" Content="7" Grid.Row="1" Grid.Column="0" Margin="5px" FontWeight="Bold" Foreground="#549467" Background="#edfff2" BorderBrush="#edfff2" Click="AddSeven">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Style="{DynamicResource buttonStyleS}" Content="8" Grid.Row="1" Grid.Column="1" Margin="5px" FontWeight="Bold" Foreground="#549467" Background="#edfff2" BorderBrush="#edfff2" Click="AddEight">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Style="{DynamicResource buttonStyleS}" Content="9" Grid.Row="1" Grid.Column="2" Margin="5px" FontWeight="Bold" Foreground="#549467" Background="#edfff2" BorderBrush="#edfff2" Click="AddNine">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </Grid>
+    </Grid>
+    </Border>
+
+</Window>
