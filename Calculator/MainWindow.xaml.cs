@@ -55,16 +55,20 @@ namespace Calculator
 
         private void AddZero(object sender, RoutedEventArgs e)
         {
-            if (_canType)
+            if (_mainText.Text == "") 
             {
-                if (!_mainText.Text.Contains("0") || _mainText.Text.Contains(","))
+                _mainText.Text = "0";
+            }
+            else if (_canType)
+            {
+                if (float.Parse(_mainText.Text) != 0f || _mainText.Text.Contains(","))
                 {
                     _mainText.Text += "0";
                 }
             }
             else if (!_canType)
             {
-                if (!_mainText.Text.Contains("0") || _mainText.Text.Contains(","))
+                if (float.Parse(_mainText.Text) != 0f || _mainText.Text.Contains(","))
                 {
                     _mainText.Text = "0";
                 }
@@ -99,28 +103,28 @@ namespace Calculator
                 {
                     case "Add":
                         _result = Clk.Add(_firstValue, _secondValue);
-                        _mainText.Text = _result.ToString("0.00000");
+                        PrintResult(_result);
                         break;
 
                     case "Substract":
                         _result = Clk.Substract(_firstValue, _secondValue);
-                        _mainText.Text = _result.ToString("0.00000");
+                        PrintResult(_result);
                         break;
 
                     case "Increase":
                         _result = Clk.Increase(_firstValue, _secondValue);
-                        _mainText.Text = _result.ToString("0.00000");
+                        PrintResult(_result);
                         break;
 
                     case "Divide":
                         if (_firstValue != 0f && _secondValue != 0f)
                         {
                             _result = Clk.Divide(_firstValue, _secondValue);
-                            _mainText.Text = _result.ToString("0.00000");
+                            PrintResult(_result);
                         }
                         else
                         {
-                            _mainText.Text = _result.ToString("Cant divide by 0");
+                            Print("Cant divide by 0");
                             _canType = false;
                         }
                         break;
@@ -128,59 +132,56 @@ namespace Calculator
             }
         }
 
-        private void SetActionAdd(object sender, RoutedEventArgs e)
+        private void SetAction(string action)
         {
             if (_canType)
             {
                 _firstValue = float.Parse(_mainText.Text);
-                _mainText.Text = "";
-                _action = "Add";
+                Print("");
+                _action = action;
             }
+        }
+
+        private void Print(string a) 
+        {
+            _mainText.Text = a;
+        }
+
+        private void PrintResult(float result)
+        {
+            Print(result.ToString("0.00000"));
+        }
+
+        private void SetActionAdd(object sender, RoutedEventArgs e)
+        {
+            SetAction("Add");
         }
 
         private void SetActionSubstract(object sender, RoutedEventArgs e)
         {
-            if (_canType)
-            {
-                _firstValue = float.Parse(_mainText.Text);
-                _mainText.Text = "";
-                _action = "Substract";
-            }
+            SetAction("Substract");
         }
 
         private void SetActionIncrease(object sender, RoutedEventArgs e)
         {
-            if (_canType)
-            {
-                _firstValue = float.Parse(_mainText.Text);
-                _mainText.Text = "";
-                _action = "Increase";
-            }
+            SetAction("Increase");
         }
 
         private void SetActionDivide(object sender, RoutedEventArgs e)
         {
-            if (_canType)
-            {
-                _firstValue = float.Parse(_mainText.Text);
-                _mainText.Text = "";
-                _action = "Divide";
-            }
+            SetAction("Divide");
         }
 
         private void SetActionPercent(object sender, RoutedEventArgs e)
         {
-            if (_canType)
-            {
-                _firstValue = float.Parse(_mainText.Text);
-                _result = Clk.Percent(_firstValue);
-                _mainText.Text = _result.ToString("0.00000");
-            }
+            _firstValue = float.Parse(_mainText.Text);
+            _result = Clk.Percent(_firstValue);
+            PrintResult(_result);
         }
 
         private void Clear(object sender, RoutedEventArgs e)
         {
-            _mainText.Text = "";
+            Print("");
         }
 
         private void Revert(object sender, RoutedEventArgs e)
@@ -198,184 +199,69 @@ namespace Calculator
             }
         }
 
-        private void AddOne(object sender, RoutedEventArgs e)
+        private void AddNum(string num)
         {
             if (_mainText.Text != "")
             {
                 if (_canType && (float.Parse(_mainText.Text) != 0f || _mainText.Text.Contains(",")))
                 {
-                    _mainText.Text += "1";
+                    _mainText.Text += num;
                 }
                 else if (!_canType || (float.Parse(_mainText.Text) == 0f && !_mainText.Text.Contains(",")))
                 {
-                    _mainText.Text = "1";
+                    _mainText.Text = num;
                     _canType = true;
                 }
             }
-            else 
+            else
             {
-                _mainText.Text = "1";
+                _mainText.Text = num;
             }
+        }
+
+        private void AddOne(object sender, RoutedEventArgs e)
+        {
+            AddNum("1");
         }
 
         private void AddTwo(object sender, RoutedEventArgs e)
         {
-            if(_mainText.Text != "")
-            {
-                if (_canType && (float.Parse(_mainText.Text) != 0f || _mainText.Text.Contains(",")))
-                {
-                    _mainText.Text += "2";
-                }
-                else if (!_canType || (float.Parse(_mainText.Text) == 0f && !_mainText.Text.Contains(",")))
-                {
-                    _mainText.Text = "2";
-                    _canType = true;
-                }
-            }
-            else
-            {
-                _mainText.Text = "2";
-            }
+            AddNum("2");
         }
 
         private void AddThree(object sender, RoutedEventArgs e)
         {
-            if(_mainText.Text != "")
-            {
-                if (_canType && (float.Parse(_mainText.Text) != 0f || _mainText.Text.Contains(",")))
-                {
-                    _mainText.Text += "3";
-                }
-                else if (!_canType || (float.Parse(_mainText.Text) == 0f && !_mainText.Text.Contains(",")))
-                {
-                    _mainText.Text = "3";
-                    _canType = true;
-                }
-            }
-            else
-            {
-                _mainText.Text = "3";
-            }
+            AddNum("3");
         }
 
         private void AddFour(object sender, RoutedEventArgs e)
         {
-            if(_mainText.Text != "")
-                {
-                if (_canType && (float.Parse(_mainText.Text) != 0f || _mainText.Text.Contains(",")))
-                {
-                    _mainText.Text += "4";
-                }
-                else if (!_canType || (float.Parse(_mainText.Text) == 0f && !_mainText.Text.Contains(",")))
-                {
-                   _mainText.Text = "4";
-                   _canType = true;
-                }
-            }
-            else
-            {
-                _mainText.Text = "4";
-            }
+            AddNum("4");
         }
 
         private void AddFive(object sender, RoutedEventArgs e)
         {
-            if(_mainText.Text != "")
-                {
-                if (_canType && (float.Parse(_mainText.Text) != 0f || _mainText.Text.Contains(",")))
-                {
-                    _mainText.Text += "5";
-                }
-                else if (!_canType || (float.Parse(_mainText.Text) == 0f && !_mainText.Text.Contains(",")))
-                {
-                    _mainText.Text = "5";
-                    _canType = true;
-                }
-            }
-            else
-            {
-                _mainText.Text = "5";
-            }
+            AddNum("5");
         }
 
         private void AddSix(object sender, RoutedEventArgs e)
         {
-            if(_mainText.Text != "")
-                {
-                if (_canType && (float.Parse(_mainText.Text) != 0f || _mainText.Text.Contains(",")))
-                {
-                    _mainText.Text += "6";
-                }
-                else if (!_canType || (float.Parse(_mainText.Text) == 0f && !_mainText.Text.Contains(",")))
-                {
-                    _mainText.Text = "6";
-                    _canType = true;
-                }
-            }
-            else
-            {
-                _mainText.Text = "6";
-            }
+            AddNum("6");
         }
 
         private void AddSeven(object sender, RoutedEventArgs e)
         {
-            if(_mainText.Text != "")
-                {
-                if (_canType && (float.Parse(_mainText.Text) != 0f || _mainText.Text.Contains(",")))
-                {
-                    _mainText.Text += "7";
-                }
-                else if (!_canType || (float.Parse(_mainText.Text) == 0f && !_mainText.Text.Contains(",")))
-                {
-                    _mainText.Text = "7";
-                    _canType = true;
-                }
-            }
-            else
-            {
-                _mainText.Text = "7";
-            }
+            AddNum("7");
         }
 
         private void AddEight(object sender, RoutedEventArgs e)
         {
-            if(_mainText.Text != "")
-                {
-                if (_canType && (float.Parse(_mainText.Text) != 0f || _mainText.Text.Contains(",")))
-                {
-                    _mainText.Text += "8";
-                }
-                else if (!_canType || (float.Parse(_mainText.Text) == 0f && !_mainText.Text.Contains(",")))
-                {
-                    _mainText.Text = "8";
-                    _canType = true;
-                }
-            }
-            else
-            {
-                _mainText.Text = "8";
-            }
+            AddNum("8");
         }
 
         private void AddNine(object sender, RoutedEventArgs e)
         {
-            if(_mainText.Text != "")
-            {
-                if (_canType && (float.Parse(_mainText.Text) != 0f || _mainText.Text.Contains(",")))
-                {
-                    _mainText.Text += "9";
-                }
-                else if (!_canType || (float.Parse(_mainText.Text) == 0f && !_mainText.Text.Contains(",")))
-                {
-                    _mainText.Text = "9";
-                    _canType = true;
-                }
-            }
-            else
-            {
-                _mainText.Text = "9";
-            }
+            AddNum("9");
         }
     }
 
