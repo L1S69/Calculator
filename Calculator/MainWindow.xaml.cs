@@ -149,7 +149,7 @@ namespace Calculator
 
         private void PrintResult(float result)
         {
-            Print(result.ToString("0.00000"));
+            Print(result.ToString());
         }
 
         private void SetActionAdd(object sender, RoutedEventArgs e)
