@@ -13,7 +13,7 @@
         Background="Transparent"
         WindowStartupLocation="CenterScreen"
         MouseDown="Window_MouseDown" FontFamily="Consolas" FontWeight="Normal"
-        >
+        ResizeMode="CanResize">
     <Window.Resources>
         <Style x:Key="FocusVisual">
             <Setter Property="Control.Template">
@@ -73,7 +73,7 @@
         
     </Window.Resources>
 
-    <Border CornerRadius="10" Background="White" BorderBrush="White">
+    <Border CornerRadius="16" Background="White" BorderBrush ="Gray" BorderThickness="1px">
     <Grid>
 
             <Grid.RowDefinitions>
@@ -90,7 +90,7 @@
             <Button Content="X" Style="{DynamicResource buttonStyleS}" Foreground="White" FontWeight="Bold" FontSize="12" Margin="175,5,5,5" Background="#4ba367" BorderBrush="#4ba367" Click="CloseApp">
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="CornerRadius" Value="12"/>
                     </Style>
                 </Button.Resources>
             </Button>
@@ -116,7 +116,7 @@
             <Button Style="{DynamicResource buttonStyleS}" Content="0" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="5px" FontWeight="Bold" Foreground="#549467" Background="#edfff2" BorderBrush="#edfff2" Click="AddZero">
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="CornerRadius" Value="16"/>
                     </Style>
                 </Button.Resources>
             </Button>
@@ -124,7 +124,7 @@
             <Button Style="{DynamicResource buttonStyleS}" Content="," Grid.Row="4" Grid.Column="2" Margin="5px" FontWeight="Bold" Foreground="#549467" Background="#edfff2" BorderBrush="#edfff2" Click="AddDot">
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="CornerRadius" Value="16"/>
                     </Style>
                 </Button.Resources>
             </Button>
@@ -132,7 +132,7 @@
             <Button Style="{DynamicResource buttonStyleS}" Content="=" Grid.Row="4" Grid.Column="3" Margin="5px" FontWeight="black" FontSize="20" Foreground="White" Background="#66ff93" BorderBrush="#edfff2" Click="CalculateResult">
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="CornerRadius" Value="16"/>
                     </Style>
                 </Button.Resources>
             </Button>
@@ -140,7 +140,7 @@
             <Button Style="{DynamicResource buttonStyleS}" Content="+" Grid.Row="3" Grid.Column="3" Margin="5px" FontWeight="Black" FontSize="20" Foreground="White" Background="#66ff93" BorderBrush="#edfff2" Click="SetActionAdd">
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="CornerRadius" Value="16"/>
                     </Style>
                 </Button.Resources>
             </Button>
@@ -148,7 +148,7 @@
             <Button Style="{DynamicResource buttonStyleS}" Content="-" Grid.Row="2" Grid.Column="3" Margin="5px" FontWeight="Black" FontSize="20" Foreground="White" Background="#66ff93" BorderBrush="#edfff2" Click="SetActionSubstract">
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="CornerRadius" Value="16"/>
                     </Style>
                 </Button.Resources>
             </Button>
@@ -156,7 +156,7 @@
             <Button Style="{DynamicResource buttonStyleS}" Content="*" Grid.Row="1" Grid.Column="3" Margin="5px" FontWeight="Black" FontSize="16" Foreground="White" Background="#66ff93" BorderBrush="#edfff2" Click="SetActionIncrease">
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="CornerRadius" Value="16"/>
                     </Style>
                 </Button.Resources>
             </Button>
@@ -164,7 +164,7 @@
             <Button Style="{DynamicResource buttonStyleS}" Content="/" Grid.Row="0" Grid.Column="3" Margin="5px" FontWeight="Black" FontSize="14" Foreground="White" Background="#66ff93" BorderBrush="#edfff2" Click="SetActionDivide">
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="CornerRadius" Value="16"/>
                     </Style>
                 </Button.Resources>
             </Button>
@@ -172,7 +172,7 @@
             <Button Style="{DynamicResource buttonStyleS}" Content="%" Grid.Row="0" Grid.Column="2" Margin="5px" FontWeight="Black" FontSize="14" Foreground="White" Background="#adffc5" BorderBrush="#edfff2" Click="SetActionPercent">
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="CornerRadius" Value="16"/>
                     </Style>
                 </Button.Resources>
             </Button>
@@ -180,7 +180,7 @@
             <Button Style="{DynamicResource buttonStyleS}" Content="AC" Grid.Row="0" Grid.Column="0" Margin="5px" FontWeight="Black" FontSize="14" Foreground="White" Background="#adffc5" BorderBrush="#edfff2" Click="Clear">
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="CornerRadius" Value="16"/>
                     </Style>
                 </Button.Resources>
             </Button>
@@ -188,7 +188,7 @@
             <Button Style="{DynamicResource buttonStyleS}" Content="+-" Grid.Row="0" Grid.Column="1" Margin="5px" FontWeight="Black" FontSize="20" Foreground="White" Background="#adffc5" BorderBrush="#edfff2" Click="Revert">
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="CornerRadius" Value="16"/>
                     </Style>
                 </Button.Resources>
             </Button>
@@ -196,7 +196,7 @@
             <Button Style="{DynamicResource buttonStyleS}" Content="1" Grid.Row="3" Grid.Column="0" Margin="5px" FontWeight="Bold" Foreground="#549467" Background="#edfff2" BorderBrush="#edfff2" Click="AddOne">
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="CornerRadius" Value="16"/>
                     </Style>
                 </Button.Resources>
             </Button>
@@ -204,7 +204,7 @@
             <Button Style="{DynamicResource buttonStyleS}" Content="2" Grid.Row="3" Grid.Column="1" Margin="5px" FontWeight="Bold" Foreground="#549467" Background="#edfff2" BorderBrush="#edfff2" Click="AddTwo">
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="CornerRadius" Value="16"/>
                     </Style>
                 </Button.Resources>
             </Button>
@@ -212,7 +212,7 @@
             <Button Style="{DynamicResource buttonStyleS}" Content="3" Grid.Row="3" Grid.Column="2" Margin="5px" FontWeight="Bold" Foreground="#549467" Background="#edfff2" BorderBrush="#edfff2" Click="AddThree">
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="CornerRadius" Value="16"/>
                     </Style>
                 </Button.Resources>
             </Button>
@@ -220,7 +220,7 @@
             <Button Style="{DynamicResource buttonStyleS}" Content="4" Grid.Row="2" Grid.Column="0" Margin="5px" FontWeight="Bold" Foreground="#549467" Background="#edfff2" BorderBrush="#edfff2" Click="AddFour">
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="CornerRadius" Value="16"/>
                     </Style>
                 </Button.Resources>
             </Button>
@@ -228,7 +228,7 @@
             <Button Style="{DynamicResource buttonStyleS}" Content="5" Grid.Row="2" Grid.Column="1" Margin="5px" FontWeight="Bold" Foreground="#549467" Background="#edfff2" BorderBrush="#edfff2" Click="AddFive">
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="CornerRadius" Value="16"/>
                     </Style>
                 </Button.Resources>
             </Button>
@@ -236,7 +236,7 @@
             <Button Style="{DynamicResource buttonStyleS}" Content="6" Grid.Row="2" Grid.Column="2" Margin="5px" FontWeight="Bold" Foreground="#549467" Background="#edfff2" BorderBrush="#edfff2" Click="AddSix">
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="CornerRadius" Value="16"/>
                     </Style>
                 </Button.Resources>
             </Button>
@@ -244,7 +244,7 @@
             <Button Style="{DynamicResource buttonStyleS}" Content="7" Grid.Row="1" Grid.Column="0" Margin="5px" FontWeight="Bold" Foreground="#549467" Background="#edfff2" BorderBrush="#edfff2" Click="AddSeven">
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="CornerRadius" Value="16"/>
                     </Style>
                 </Button.Resources>
             </Button>
@@ -252,7 +252,7 @@
             <Button Style="{DynamicResource buttonStyleS}" Content="8" Grid.Row="1" Grid.Column="1" Margin="5px" FontWeight="Bold" Foreground="#549467" Background="#edfff2" BorderBrush="#edfff2" Click="AddEight">
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="CornerRadius" Value="16"/>
                     </Style>
                 </Button.Resources>
             </Button>
@@ -260,7 +260,7 @@
             <Button Style="{DynamicResource buttonStyleS}" Content="9" Grid.Row="1" Grid.Column="2" Margin="5px" FontWeight="Bold" Foreground="#549467" Background="#edfff2" BorderBrush="#edfff2" Click="AddNine">
                 <Button.Resources>
                     <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
+                        <Setter Property="CornerRadius" Value="16"/>
                     </Style>
                 </Button.Resources>
             </Button>
