@@ -1,23 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Calculator
 {
     public partial class MainWindow : Window
     {
         private TextBlock _mainText;
+        public string MainString;
 
         private string _action;
 
@@ -26,6 +17,11 @@ namespace Calculator
         private float _result;
 
         private bool _canType = true;
+
+        private void UpdateMainText() 
+        {
+            _mainText.Text = MainString;
+        }
 
         public MainWindow()
         {
@@ -57,20 +53,20 @@ namespace Calculator
         {
             if (_mainText.Text == "") 
             {
-                _mainText.Text = "0";
+                Print("0");
             }
             else if (_canType)
             {
                 if (float.Parse(_mainText.Text) != 0f || _mainText.Text.Contains(","))
                 {
-                    _mainText.Text += "0";
+                    AddText("0");
                 }
             }
             else if (!_canType)
             {
                 if (float.Parse(_mainText.Text) != 0f || _mainText.Text.Contains(","))
                 {
-                    _mainText.Text = "0";
+                    Print("0");
                 }
                 _canType = true;
             }
@@ -82,14 +78,14 @@ namespace Calculator
             {
                 if (!_mainText.Text.Contains(","))
                 {
-                    _mainText.Text += ",";
+                    AddText(",");
                 }
             }
             else if (!_canType)
             {
                 if (!_mainText.Text.Contains(","))
                 {
-                    _mainText.Text += ",";
+                    AddText(",");
                 }
             }
         }
@@ -144,12 +140,20 @@ namespace Calculator
 
         private void Print(string a) 
         {
-            _mainText.Text = a;
+            MainString = a;
+            UpdateMainText();
+        }
+
+        private void AddText(string a) 
+        {
+            MainString += a;
+            UpdateMainText();
         }
 
         private void PrintResult(float result)
         {
-            Print(result.ToString());
+            MainString = result.ToString();
+            UpdateMainText();
         }
 
         private void SetActionAdd(object sender, RoutedEventArgs e)
@@ -190,11 +194,11 @@ namespace Calculator
             {
                 if (!_mainText.Text.Contains("-"))
                 {
-                    _mainText.Text = "-" + _mainText.Text;
+                    Print("-" + _mainText.Text);
                 }
                 else
                 {
-                    _mainText.Text = _mainText.Text.Substring(1);
+                    Print(_mainText.Text.Substring(1));
                 }
             }
         }
@@ -205,17 +209,17 @@ namespace Calculator
             {
                 if (_canType && (float.Parse(_mainText.Text) != 0f || _mainText.Text.Contains(",")))
                 {
-                    _mainText.Text += num;
+                    AddText(num);
                 }
                 else if (!_canType || (float.Parse(_mainText.Text) == 0f && !_mainText.Text.Contains(",")))
                 {
-                    _mainText.Text = num;
+                    Print(num);
                     _canType = true;
                 }
             }
             else
             {
-                _mainText.Text = num;
+                Print(num);
             }
         }
 
@@ -265,31 +269,4 @@ namespace Calculator
         }
     }
 
-    static class Clk
-    {
-        public static float Add(float _first, float _second)
-        {
-            return _first + _second;
-        }
-
-        public static float Substract(float _first, float _second)
-        {
-            return _first - _second;
-        }
-
-        public static float Increase(float _first, float _second)
-        {
-            return _first * _second;
-        }
-
-        public static float Divide(float _first, float _second)
-        {
-            return _first / _second;
-        }
-
-        public static float Percent(float _value)
-        {
-            return _value / 100;
-        }
-    }
 }

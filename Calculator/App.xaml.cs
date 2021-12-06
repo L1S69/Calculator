@@ -1,17 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace Calculator
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
+    }
+
+    public static class Clk
+    {
+        public static float Add(float _first, float _second)
+        {
+            return _first + _second;
+        }
+
+        public static float Substract(float _first, float _second)
+        {
+            return _first - _second;
+        }
+
+        public static float Increase(float _first, float _second)
+        {
+            return _first * _second;
+        }
+
+        public static float Divide(float _first, float _second)
+        {
+            return _first / _second;
+        }
+
+        public static float Percent(float _value)
+        {
+            return _value / 100;
+        }
     }
 }
