@@ -33,4 +33,24 @@ namespace Calculator
             return _value / 100;
         }
     }
+
+    public class Printer
+    {
+        public string MainString;
+
+        public void Print(string a)
+        {
+            MainString = a;
+        }
+
+        public void AddText(string a)
+        {
+            MainString += a;
+        }
+
+        public void PrintResult(float result)
+        {
+            MainString = result.ToString();
+        }
+    }
 }

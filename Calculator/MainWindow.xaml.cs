@@ -8,7 +8,6 @@ namespace Calculator
     public partial class MainWindow : Window
     {
         private TextBlock _mainText;
-        public string MainString;
 
         private string _action;
 
@@ -18,9 +17,11 @@ namespace Calculator
 
         private bool _canType = true;
 
-        private void UpdateMainText() 
+        private Printer _printer = new Printer();
+
+        public void UpdateMainText() 
         {
-            _mainText.Text = MainString;
+            _mainText.Text = _printer.MainString;
         }
 
         public MainWindow()
@@ -53,20 +54,26 @@ namespace Calculator
         {
             if (_mainText.Text == "") 
             {
-                Print("0");
+                _printer.Print("0");
+
+                UpdateMainText();
             }
             else if (_canType)
             {
                 if (float.Parse(_mainText.Text) != 0f || _mainText.Text.Contains(","))
                 {
-                    AddText("0");
+                    _printer.AddText("0");
+
+                    UpdateMainText();
                 }
             }
             else if (!_canType)
             {
                 if (float.Parse(_mainText.Text) != 0f || _mainText.Text.Contains(","))
                 {
-                    Print("0");
+                    _printer.Print("0");
+
+                    UpdateMainText();
                 }
                 _canType = true;
             }
@@ -78,14 +85,18 @@ namespace Calculator
             {
                 if (!_mainText.Text.Contains(","))
                 {
-                    AddText(",");
+                    _printer.AddText(",");
+
+                    UpdateMainText();
                 }
             }
             else if (!_canType)
             {
                 if (!_mainText.Text.Contains(","))
                 {
-                    AddText(",");
+                    _printer.AddText(",");
+
+                    UpdateMainText();
                 }
             }
         }
@@ -99,29 +110,39 @@ namespace Calculator
                 {
                     case "Add":
                         _result = Clk.Add(_firstValue, _secondValue);
-                        PrintResult(_result);
+                        _printer.PrintResult(_result);
+
+                        UpdateMainText();
                         break;
 
                     case "Substract":
                         _result = Clk.Substract(_firstValue, _secondValue);
-                        PrintResult(_result);
+                        _printer.PrintResult(_result);
+
+                        UpdateMainText();
                         break;
 
                     case "Increase":
                         _result = Clk.Increase(_firstValue, _secondValue);
-                        PrintResult(_result);
+                        _printer.PrintResult(_result);
+
+                        UpdateMainText();
                         break;
 
                     case "Divide":
                         if (_firstValue != 0f && _secondValue != 0f)
                         {
                             _result = Clk.Divide(_firstValue, _secondValue);
-                            PrintResult(_result);
+                            _printer.PrintResult(_result);
+
+                            UpdateMainText();
                         }
                         else
                         {
-                            Print("Cant divide by 0");
+                            _printer.Print("Cant divide by 0");
                             _canType = false;
+
+                            UpdateMainText();
                         }
                         break;
                 }
@@ -133,27 +154,11 @@ namespace Calculator
             if (_canType)
             {
                 _firstValue = float.Parse(_mainText.Text);
-                Print("");
+                _printer.Print("");
                 _action = action;
+
+                UpdateMainText();
             }
-        }
-
-        private void Print(string a) 
-        {
-            MainString = a;
-            UpdateMainText();
-        }
-
-        private void AddText(string a) 
-        {
-            MainString += a;
-            UpdateMainText();
-        }
-
-        private void PrintResult(float result)
-        {
-            MainString = result.ToString();
-            UpdateMainText();
         }
 
         private void SetActionAdd(object sender, RoutedEventArgs e)
@@ -180,12 +185,16 @@ namespace Calculator
         {
             _firstValue = float.Parse(_mainText.Text);
             _result = Clk.Percent(_firstValue);
-            PrintResult(_result);
+            _printer.PrintResult(_result);
+
+            UpdateMainText();
         }
 
         private void Clear(object sender, RoutedEventArgs e)
         {
-            Print("");
+            _printer.Print("");
+
+            UpdateMainText();
         }
 
         private void Revert(object sender, RoutedEventArgs e)
@@ -194,11 +203,15 @@ namespace Calculator
             {
                 if (!_mainText.Text.Contains("-"))
                 {
-                    Print("-" + _mainText.Text);
+                    _printer.Print("-" + _mainText.Text);
+
+                    UpdateMainText();
                 }
                 else
                 {
-                    Print(_mainText.Text.Substring(1));
+                    _printer.Print(_mainText.Text.Substring(1));
+
+                    UpdateMainText();
                 }
             }
         }
@@ -209,17 +222,23 @@ namespace Calculator
             {
                 if (_canType && (float.Parse(_mainText.Text) != 0f || _mainText.Text.Contains(",")))
                 {
-                    AddText(num);
+                    _printer.AddText(num);
+
+                    UpdateMainText();
                 }
                 else if (!_canType || (float.Parse(_mainText.Text) == 0f && !_mainText.Text.Contains(",")))
                 {
-                    Print(num);
+                    _printer.Print(num);
                     _canType = true;
+
+                    UpdateMainText();
                 }
             }
             else
             {
-                Print(num);
+                _printer.Print(num);
+
+                UpdateMainText();
             }
         }
 
