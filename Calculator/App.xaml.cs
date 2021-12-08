@@ -36,21 +36,22 @@ namespace Calculator
 
     public class Printer
     {
-        public string MainString;
+        private string _mainString;
+        public string MainString { get => _mainString; private set => _mainString = value; }
 
         public void Print(string a)
         {
-            MainString = a;
+            _mainString = a;
         }
 
         public void AddText(string a)
         {
-            MainString += a;
+            _mainString += a;
         }
 
         public void PrintResult(float result)
         {
-            MainString = result.ToString();
+            _mainString = result.ToString();
         }
     }
 }
