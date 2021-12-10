@@ -286,6 +286,22 @@ namespace Calculator
         {
             AddNum("9");
         }
+
+        private void MinimizeApp(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void MaximizeApp(object sender, RoutedEventArgs e)
+        {
+            if (IsMaximized()) WindowState = WindowState.Normal;
+            else WindowState = WindowState.Maximized;
+        }
+
+        private bool IsMaximized() 
+        {
+            return WindowState == WindowState.Maximized;
+        }
     }
 
 }
