@@ -302,6 +302,21 @@ namespace Calculator
         {
             return WindowState == WindowState.Maximized;
         }
+
+        private void EnableDarkMode(object sender, RoutedEventArgs e)
+        {
+            //
+        }
+
+        private void EnableLightMode(object sender, RoutedEventArgs e)
+        {
+            //
+        }
+
+        private void SetMode() 
+        {
+            //
+        }
     }
 
 }

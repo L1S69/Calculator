@@ -192,12 +192,63 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="FocusVisual1">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background1" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border1" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background1" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border1" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background1" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border1" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background1" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border1" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground1" Color="#FF838383"/>
+        <Style x:Key="Toggledark" TargetType="{x:Type ToggleButton}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual1}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background1}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border1}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#edfff2"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#66ff93"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background1}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground1}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-        
     </Window.Resources>
 
     <Border CornerRadius="18" Background="White" BorderBrush ="Gray" BorderThickness="1px">
-    <Grid>
+        <Grid>
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
@@ -218,7 +269,7 @@
                 </Button.Resources>
             </Button>
 
-                <Button Content="" Style="{DynamicResource buttonStyleMinimize}" Foreground="White" Height="16" Width="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30, 8" Background="#FFF45C" BorderBrush="#D9CF4E" Click="MinimizeApp" BorderThickness="1,1,1,1">
+            <Button Content="" Style="{DynamicResource buttonStyleMinimize}" Foreground="White" Height="16" Width="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30, 8" Background="#FFF45C" BorderBrush="#D9CF4E" Click="MinimizeApp" BorderThickness="1,1,1,1">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="12"/>
@@ -226,13 +277,20 @@
                 </Button.Resources>
             </Button>
 
-                <Button Content="" Style="{DynamicResource buttonStyleMaximize}" Foreground="White" Height="16" Width="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="52, 8" Background="#47ff94" BorderBrush="#6BD658" Click="MaximizeApp" BorderThickness="1,1,1,1">
+            <Button Content="" Style="{DynamicResource buttonStyleMaximize}" Foreground="White" Height="16" Width="16" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="52, 8" Background="#47ff94" BorderBrush="#6BD658" Click="MaximizeApp" BorderThickness="1,1,1,1">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="12"/>
                     </Style>
                 </Button.Resources>
             </Button>
+            <ToggleButton Style="{DynamicResource Toggledark}" Margin="8px" Width="16px" Height="16px"  HorizontalAlignment="Right" BorderThickness="1" BorderBrush="LightGray"  Background="#ffffff" Checked="EnableDarkMode" Unchecked="EnableLightMode" >
+                <ToggleButton.Resources>
+                    <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="6"/>
+                    </Style>
+                </ToggleButton.Resources>
+            </ToggleButton>
 
                 <TextBlock x:Name="MainText" TextAlignment="Center" VerticalAlignment="Top" FontSize="20" FontWeight="Medium" Foreground="#5e7365" Margin="0,17,0,0" Grid.Row="1" FontFamily="Consolas"/>
             </Grid>
