@@ -2,12 +2,14 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Calculator
 {
     public partial class MainWindow : Window
     {
         private TextBlock _mainText;
+        private Border _window;
 
         private string _action;
 
@@ -28,6 +30,7 @@ namespace Calculator
         {
             InitializeComponent();
             _mainText = FindName("MainText") as TextBlock;
+            _window = FindName("Window") as Border;
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -305,17 +308,28 @@ namespace Calculator
 
         private void EnableDarkMode(object sender, RoutedEventArgs e)
         {
-            //
+            SetModeDark();
         }
 
         private void EnableLightMode(object sender, RoutedEventArgs e)
         {
-            //
+            SetModeLight();
         }
 
-        private void SetMode() 
+        private void SetModeLight() 
         {
-            //
+            SetMode(255, 94, 115, 101);
+        }
+
+        private void SetModeDark()
+        {
+            SetMode(32, 255, 255, 255);
+        }
+
+        private void SetMode(byte background, byte foreground1, byte foreground2, byte foreground3)
+        {
+            _window.Background = new SolidColorBrush(Color.FromRgb(background, background, background));
+            _mainText.Foreground = new SolidColorBrush(Color.FromRgb(foreground1, foreground2, foreground3));
         }
     }
 
