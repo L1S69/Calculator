@@ -148,6 +148,20 @@ namespace Calculator
                             UpdateMainText();
                         }
                         break;
+
+                    case "Root":
+                        _result = Clk.Root(_firstValue, _secondValue);
+                        _printer.PrintResult(_result);
+
+                        UpdateMainText();
+                        break;
+
+                    case "Degree":
+                        _result = Clk.Degree(_firstValue, _secondValue);
+                        _printer.PrintResult(_result);
+
+                        UpdateMainText();
+                        break;
                 }
             }
         }
@@ -330,6 +344,43 @@ namespace Calculator
         {
             _window.Background = new SolidColorBrush(Color.FromRgb(background, background, background));
             _mainText.Foreground = new SolidColorBrush(Color.FromRgb(foreground1, foreground2, foreground3));
+        }
+
+        private void SetActionDegree(object sender, RoutedEventArgs e)
+        {
+            SetAction("Degree");
+        }
+
+        private void DegreeTwo(object sender, RoutedEventArgs e)
+        {
+            _firstValue = float.Parse(_mainText.Text);
+            _result = Clk.DegTwo(_firstValue);
+            _printer.PrintResult(_result);
+
+            UpdateMainText();
+        }
+
+        private void DegreeThree(object sender, RoutedEventArgs e)
+        {
+            _firstValue = float.Parse(_mainText.Text);
+            _result = Clk.DegThree(_firstValue);
+            _printer.PrintResult(_result);
+
+            UpdateMainText();
+        }
+
+        private void SetActionRoot(object sender, RoutedEventArgs e)
+        {
+            SetAction("Root");
+        }
+
+        private void SquareRoot(object sender, RoutedEventArgs e)
+        {
+            _firstValue = float.Parse(_mainText.Text);
+            _result = Clk.SquareRoot(_firstValue);
+            _printer.PrintResult(_result);
+
+            UpdateMainText();
         }
     }
 
